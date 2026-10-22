@@ -1,5 +1,7 @@
 # Quote Builder
 
+[![Tests](https://github.com/andreyqwerty365-netizen/quote-builder/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/andreyqwerty365-netizen/quote-builder/actions/workflows/test.yml)
+
 Конструктор коммерческих предложений с живым предпросмотром и точными расчётами в рублях. Заполните работы, стоимость и условия — получите документ для клиента и сохраните его в PDF через печать браузера.
 
 **HTML · CSS · JavaScript · Node.js 24 · Без зависимостей · [MIT](LICENSE)**
@@ -75,7 +77,7 @@ npm test
 
 Встроенный node:test проверяет расчёты, округление, валидацию, переполнение, черновик, защиту примера, модель документа и HTTP-сервер. Зависимости для тестов не нужны.
 
-GitHub Actions настроен на Node.js 24 в Linux и Windows. Workflow выполняет npm test без установки пакетов. Его первый серверный запуск произойдёт после публикации репозитория; локальные проверки и браузерная приёмка описаны в [TESTING.md](docs/TESTING.md).
+GitHub Actions настроен на Node.js 24 в Linux и Windows. Workflow выполняет npm test без установки пакетов. Состояние серверных проверок доступно по бейджу Tests; локальные проверки и браузерная приёмка описаны в [TESTING.md](docs/TESTING.md).
 
 ## Ограничения
 
@@ -105,4 +107,3 @@ docs/screenshots/          реальные снимки приложения с
 Визуальный ориентир — [Invoify](https://invoify.vercel.app/en): тёмная оболочка, фиолетовый акцент и белый документ. Код, компоненты, шрифты и изображения источника не переносились. Используются собственные SVG и системные шрифты. Подробности — в [DESIGN.md](docs/DESIGN.md).
 
 Исходный код распространяется по [лицензии MIT](LICENSE).
-
