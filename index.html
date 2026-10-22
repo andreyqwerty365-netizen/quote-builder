@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Коммерческое предложение: работы, стоимость и условия в одном документе.">
+  <meta name="theme-color" content="#10111d">
+  <title>Quote Builder — коммерческое предложение</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#editor">Перейти к данным предложения</a>
+  <header class="app-header">
+    <a class="brand" href="/" aria-label="Quote Builder, главная"><span class="brand-mark" aria-hidden="true">q.</span><span>Quote Builder</span></a>
+    <div class="header-document"><h1 id="current-title">Новое предложение</h1><p id="storage-status" class="storage-status" role="status">Новый черновик</p></div>
+    <div class="header-actions">
+      <button class="button quiet" id="clear" type="button">Новый документ</button>
+      <button class="button primary" id="print" type="button" aria-label="Печать / сохранить PDF"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7z"/><path d="M17 11h1"/></svg><span class="button-long">Печать / сохранить PDF</span><span class="button-short" aria-hidden="true">Печать / PDF</span></button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <p id="storage-error" class="storage-alert" role="alert" hidden></p>
+    <div class="view-switch" role="tablist" aria-label="Режим предложения">
+      <button id="edit-tab" role="tab" type="button" aria-controls="edit-view" aria-selected="true" tabindex="0">Данные</button>
+      <button id="preview-tab" role="tab" type="button" aria-controls="preview-view" aria-selected="false" tabindex="-1">Документ</button>
+    </div>
+
+    <div class="workspace">
+      <section class="editor-panel" id="edit-view" role="tabpanel" aria-labelledby="edit-tab">
+        <form id="editor" novalidate tabindex="-1">
+          <div class="empty-start" id="empty-start"><button class="button secondary" id="demo" type="button">Заполнить пример</button></div>
+          <section class="form-section" aria-labelledby="details-heading">
+            <h3 id="details-heading">Детали предложения</h3>
+            <div class="fields-grid">
+              <div class="field full"><label for="title">Название предложения</label><input id="title" name="title" maxlength="180" placeholder="Например, разработка сайта" aria-describedby="title-error"><span class="field-error" id="title-error"></span></div>
+              <div class="field full"><label for="provider">Исполнитель</label><input id="provider" name="provider" maxlength="180" placeholder="Ваше имя или название студии" autocomplete="off" aria-describedby="provider-error"><span class="field-error" id="provider-error"></span></div>
+              <div class="field"><label for="client">Клиент</label><input id="client" name="client" maxlength="180" placeholder="Имя или компания" autocomplete="off" aria-describedby="client-error"><span class="field-error" id="client-error"></span></div>
+              <div class="field"><label for="validUntil">Действует до</label><input id="validUntil" name="validUntil" type="date" aria-describedby="validUntil-error"><span class="field-error" id="validUntil-error"></span></div>
+            </div>
+          </section>
+
+          <section class="form-section" aria-labelledby="items-heading">
+            <div class="section-heading"><h3 id="items-heading">Работы и услуги</h3><span id="item-count" class="item-count">1 позиция</span></div>
+            <div class="items-labels" aria-hidden="true"><span>Название</span><span>Кол-во</span><span>Цена, ₽</span><span>Сумма</span><span></span></div>
+            <div id="items"></div>
+            <p class="empty-state" id="empty-items" hidden>Добавьте работу или услугу, чтобы начать смету.</p>
+            <button class="add-button" id="add-item" type="button"><span aria-hidden="true">＋</span>Добавить позицию</button>
+          </section>
+
+          <section class="form-section totals-section" aria-label="Скидка и итог">
+            <h3>Скидка и итог</h3>
+            <div class="discount-control"><label for="discount">Общая скидка</label><div class="percent-input"><input id="discount" name="discount" inputmode="decimal" maxlength="32" value="0" aria-describedby="discount-error"><span aria-hidden="true">%</span></div></div>
+            <span class="field-error" id="discount-error"></span>
+            <div class="editor-subtotal"><span>Стоимость работ</span><strong id="subtotal">—</strong></div>
+            <div class="editor-subtotal"><span>Сумма скидки</span><strong id="discount-amount">—</strong></div>
+            <div class="editor-total"><span>Итого</span><strong id="total" aria-live="polite" aria-atomic="true">—</strong></div>
+            <p id="total-note" class="total-note">Заполните позиции для расчёта</p>
+          </section>
+
+          <section class="form-section comment-section" aria-labelledby="comment-heading">
+            <div class="section-heading"><h3 id="comment-heading">Комментарий</h3><span class="optional">необязательно</span></div>
+            <label class="visually-hidden" for="comment">Условия и комментарий</label>
+            <textarea id="comment" name="comment" maxlength="2000" rows="4" placeholder="Сроки работы, этапы оплаты и другие договорённости"></textarea>
+          </section>
+          <p class="validation-summary" id="validation-summary" role="alert" hidden></p>
+        </form>
+      </section>
+
+      <section class="preview-panel" id="preview-view" role="tabpanel" aria-labelledby="preview-tab">
+        <div class="preview-toolbar"><h2>Документ</h2><span id="document-status" class="document-status">Черновик</span><span class="paper-size">A4</span></div>
+        <article id="print-document" class="document-paper" aria-label="Предложение для клиента"></article>
+        <p class="preview-footnote">Чтобы сохранить файл, выберите «Сохранить как PDF» в окне печати.</p>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="clear-dialog" aria-labelledby="clear-title" aria-describedby="clear-description">
+    <h2 id="clear-title">Создать новый документ?</h2>
+    <p id="clear-description">Текущее предложение и сохранённый черновик будут очищены.</p>
+    <div class="dialog-actions"><button class="button secondary" id="cancel-clear" type="button">Отмена</button><button class="button primary" id="confirm-clear" type="button">Создать новый</button></div>
+  </dialog>
+  <noscript><p class="noscript">Включите JavaScript, чтобы редактировать предложение и рассчитывать суммы.</p></noscript>
+</body>
+</html>
+

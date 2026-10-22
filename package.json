@@ -1,0 +1,23 @@
+{
+  "name": "quote-builder",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Локальный конструктор коммерческих предложений без зависимостей",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreyqwerty365-netizen/quote-builder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andreyqwerty365-netizen/quote-builder/issues"
+  },
+  "homepage": "https://github.com/andreyqwerty365-netizen/quote-builder#readme"
+}
